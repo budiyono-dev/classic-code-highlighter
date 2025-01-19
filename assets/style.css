@@ -1,0 +1,22 @@
+.dcf-field {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.dcf-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping to new lines */
+    gap: 20px; /* Adjust spacing between items */
+}
+
+.dcf-item {
+    flex: 1 0 300px; /* Each item takes up at least 300px width */
+    border: 1px solid #ddd;
+    padding: 15px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.dcf-item h3 {
+    margin-top: 0;
+}
