@@ -46,9 +46,9 @@ class ClassicCodeHighlighter {
     public function add_meta_box() {
         add_meta_box(
             'dcf_meta_box',
-            'Dynamic Custom Fields',
+            'Code Highlighter',
             [$this, 'meta_box_callback'],
-            'post', // Adjust post types as needed
+            'post',
             'normal',
             'high'
         );
@@ -70,7 +70,7 @@ class ClassicCodeHighlighter {
             }
             ?>
         </div>
-        <button type="button" class="button" id="dcf-add-field">Add Field</button>
+        <button type="button" class="button" id="dcf-add-field">Add Code</button>
         <script type="text/javascript">
             var nextFieldKey = <?php echo count($fields); ?>;
         </script>
@@ -88,8 +88,8 @@ class ClassicCodeHighlighter {
     private function render_field($key, $field) {
         ?>
         <div class="dcf-field">
-            <input type="text" name="dcf_fields[<?php echo $key; ?>][title]" placeholder="Field Title" value="<?php echo esc_attr($field['title']); ?>">
-            <textarea name="dcf_fields[<?php echo $key; ?>][content]" placeholder="Field Content"><?php echo esc_textarea($field['content']); ?></textarea>
+            <input type="text" name="dcf_fields[<?php echo $key; ?>][title]" placeholder="Filename" value="<?php echo esc_attr($field['title']); ?>">
+            <textarea name="dcf_fields[<?php echo $key; ?>][content]" placeholder="Source Code"><?php echo esc_textarea($field['content']); ?></textarea>
             <button type="button" class="button dcf-remove-field">Remove</button>
         </div>
         <?php
@@ -127,12 +127,10 @@ class ClassicCodeHighlighter {
         }
     }
     public function shortcode($atts) {
-        $atts = shortcode_atts( array(
-            'id' => null, // Add an 'id' attribute to the shortcode
-        ), $atts );
+        $atts = shortcode_atts( array('id' => null), $atts );
 
         if (is_null($atts['id'])) {
-            return ''; // Return nothing if no ID is provided
+            return '';
         }
 
         $post_id = get_the_ID();

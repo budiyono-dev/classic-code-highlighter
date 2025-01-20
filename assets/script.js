@@ -2,8 +2,8 @@ jQuery(document).ready(function($) {
     $('#dcf-add-field').click(function() {
         var newField = `
             <div class="dcf-field">
-                <input type="text" name="dcf_fields[${nextFieldKey}][title]" placeholder="Field Title">
-                <textarea name="dcf_fields[${nextFieldKey}][content]" placeholder="Field Content"></textarea>
+                <input type="text" name="dcf_fields[${nextFieldKey}][title]" placeholder="Filename">
+                <textarea name="dcf_fields[${nextFieldKey}][content]" placeholder="Source Code"></textarea>
                 <button type="button" class="button dcf-remove-field">Remove</button>
             </div>
         `;
