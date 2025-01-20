@@ -1,0 +1,24 @@
+.cch-container {
+    margin: 0;
+}
+.cch-container pre {
+    border-radius: 0 0 .2rem .2rem;
+    margin: 0;
+}
+.cch-container .filename {
+    margin: 0;
+    border-radius: .2rem .2rem 0 0;
+    width: 100%;
+    background-color: #0D1117;
+    color: white;
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+    font-family: monospace;
+    font-size: 15px;
+    min-height: 30px;
+    display: grid;
+    align-content: center;
+}
+.cch-container pre * {
+    font-size: 13px;
+}

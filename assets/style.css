@@ -1,22 +1,30 @@
-.dcf-field {
+.cch-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
     border: 1px solid #ccc;
     padding: 10px;
     background-color: #F0F0F1;
 }
 
-#dcf-fields-container {
+#cch-fields-container {
     display: grid;
     gap: 5px;
     margin-bottom: 10px;
 }
 
-.dcf-item {
+
+#cch-fields-container .cch-field p {
+    margin: 3px 0;
+}
+
+.cch-item {
     flex: 1 0 300px; /* Each item takes up at least 300px width */
     border: 1px solid #ddd;
     padding: 15px;
     box-sizing: border-box;
 }
 
-.dcf-item h3 {
+.cch-item h3 {
     margin-top: 0;
 }
