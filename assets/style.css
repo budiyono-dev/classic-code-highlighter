@@ -28,3 +28,12 @@
 .cch-item h3 {
     margin-top: 0;
 }
+
+#cch-add-field {
+    display: block;
+}
+#cch-note {
+    display: block;
+    margin: 5px 0;
+    font-style: italic;
+}

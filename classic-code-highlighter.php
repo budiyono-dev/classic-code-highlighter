@@ -80,11 +80,16 @@ class ClassicCodeHighlighter {
                     $this->render_field( $key, $field );
                 }
             }
+            $nextFieldKey = array_key_last($fields);
+            if (is_null($nextFieldKey)) {
+                $nextFieldKey = 0;
+            }
             ?>
         </div>
         <button type="button" class="button" id="cch-add-field">Add Code</button>
+        <span id="cch-note">*save to get shortcode</span>
         <script type="text/javascript">
-            var nextFieldKey = <?php echo array_key_last($fields); ?>;
+            var nextFieldKey = <?php echo $nextFieldKey; ?>;
         </script>
         <?php
     }
