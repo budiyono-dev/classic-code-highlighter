@@ -28,7 +28,7 @@ class CopyButtonPlugin {
                 updateDataCopy();
             }
         }
-        const copyNavigator = (text) => navigator.clipboard.writeText(newText).then(updateDataCopy());
+        const copyNavigator = (text) => navigator.clipboard.writeText(text).then(updateDataCopy());
 
         const updateDataCopy = () => {
             if (button.dataset.copied === 'true') return;
