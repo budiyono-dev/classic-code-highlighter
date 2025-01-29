@@ -8,7 +8,7 @@
 
 namespace CDA\CodeHighlighter\Classic;
 
-if ( ! defined( 'WPINC' ) ) {
+if ( ! defined( 'WPINC' ) || !defined('ABSPATH') ) {
     die;
 }
 
@@ -29,40 +29,28 @@ class ClassicCodeHighlighter {
     }
 
     public function init() {
-        add_action( 'enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts' ] );
-        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scrips_theme' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_scripts_be' ] );
+        add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_scrips_fe' ] );
         add_action( 'add_meta_boxes', [ $this, 'add_meta_box' ] );
         add_action( 'save_post', [ $this, 'save_meta_box_data' ] );
         add_shortcode( 'cch', [ $this, 'shortcode' ] );
     }
 
-    public function enqueue_scrips_theme() {
+    public function enqueue_scrips_fe() {
         wp_enqueue_style( 'cch-th-gh-dark', plugins_url( 'assets/hjs/styles/github-dark.css', __FILE__ ), [], '1.0' );
-        wp_enqueue_style( 'cch-th-hjs-copy', plugins_url( 'assets/hjs/highlightjs-copy.min.css', __FILE__ ), [], '1.0' );
         wp_enqueue_style( 'cch-th-script', plugins_url( 'assets/main.css', __FILE__ ), [], '1.0' );
 
         wp_enqueue_script( 'cch-th-hjs', plugins_url( 'assets/hjs/highlight.min.js', __FILE__ ), [], '1.0', true );
-        wp_enqueue_script( 'cch-th-hjs-copy', plugins_url( 'assets/hjs/highlightjs-copy.min.js', __FILE__ ), [], '1.0', true );
-        wp_enqueue_script( 'cch-th-scripts', plugins_url( 'assets/main.js', __FILE__ ), ['jquery','cch-th-hjs','cch-th-hjs-copy'], '1.0', true );
+        wp_enqueue_script( 'cch-th-scripts', plugins_url( 'assets/main.js', __FILE__ ), ['jquery','cch-th-hjs'], '1.0', true );
     }
 
-    public function enqueue_scripts() {
+    public function enqueue_scripts_be() {
         wp_enqueue_style( 'cch-styles', plugins_url( 'assets/style.css', __FILE__ ), [], '1.0' );
         wp_enqueue_script( 'cch-scripts', plugins_url( 'assets/script.js', __FILE__ ), [ 'jquery' ], '1.0', true );
-//		wp_localize_script( 'cch-scripts', 'dcf_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
-
     }
 
     public function add_meta_box() {
-        add_meta_box(
-            'cch_meta_box',
-            'Code Highlighter',
-            [ $this, 'callback' ],
-            'post',
-            'normal',
-            'high'
-        );
+        add_meta_box('cch_meta_box','Code Highlighter',[ $this, 'callback' ],'post','normal','high');
     }
 
     public function callback( $post ) {
@@ -163,7 +151,7 @@ class ClassicCodeHighlighter {
             $field  = $fields[ $atts['id'] ];
             $idField = 'cch_sc_'.$atts['id'];
 
-            $output = '<div class="cch-container"><div class="filename">'.$field['filename'].'</div>';
+            $output = '<div class="cch-container"><div class="cch-header"> <span class="filename">'.$field['filename'].'</span></div>';
             $output .= '<pre><code id="'.$idField.'" class="cch_sc '.$field['language'].'">'. esc_html( $field['source_code'] ) .'</code></pre>';
             $output .= '</div>';
             return $output;
