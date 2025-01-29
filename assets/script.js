@@ -22,6 +22,6 @@ jQuery(document).ready(function($) {
     });
 
     $(document).on('click', '.cch-remove-field', function() {
-        $(this).closest('.dcf-field').remove();
+        $(this).closest('.cch-field').remove();
     });
 });
