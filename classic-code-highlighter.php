@@ -6,13 +6,13 @@
  * Author: Budiyono
  */
 
-namespace Codingduluaja\Plugin\CodeHighlighter;
+namespace Codingduluaja\Plugin;
 
 if ( ! defined( 'WPINC' ) || !defined('ABSPATH') ) {
     die;
 }
 
-class ClassicCodeHighlighter {
+class CodeHighlighter {
 
     private static $instance;
 
@@ -161,4 +161,4 @@ class ClassicCodeHighlighter {
     }
 }
 
-ClassicCodeHighlighter::get_instance();
+CodeHighlighter::get_instance();
