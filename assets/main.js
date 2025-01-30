@@ -64,10 +64,17 @@ class CopyButtonPlugin {
 
 jQuery(document).ready(function ($) {
     $('.cch-manual').each(function (idx, e) {
+        const filename = e?.dataset?.filename ?? '';
         const cchElement = '<div class="cch-container"><div class="cch-header"><span class="filename">' +
-            e.dataset.filename + '</span></div><pre>' + $(this).closest('pre').html() + '</pre></div>';
+            filename + '</span></div><pre>' + $(this).closest('pre').html() + '</pre></div>';
         $(this).closest('pre').replaceWith(cchElement);
     });
     hljs.addPlugin(new CopyButtonPlugin());
-    hljs.highlightAll();
+
+    $('pre code').each(function(idx, el){
+        const classlist  = el.classList;
+        if (classlist.contains('cch_sc') || classlist.contains("cch-manual")) {
+            hljs.highlightElement(el);
+        }
+    });
 });
