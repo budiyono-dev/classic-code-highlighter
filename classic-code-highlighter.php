@@ -6,7 +6,7 @@
  * Author: Budiyono
  */
 
-namespace CDA\CodeHighlighter\Classic;
+namespace Codingduluaja\Plugin\CodeHighlighter;
 
 if ( ! defined( 'WPINC' ) || !defined('ABSPATH') ) {
     die;
@@ -37,7 +37,7 @@ class ClassicCodeHighlighter {
     }
 
     public function enqueue_scrips_fe() {
-        wp_enqueue_style( 'cch-th-gh-dark', plugins_url( 'assets/hjs/styles/github-dark.css', __FILE__ ), [], '1.0' );
+        wp_enqueue_style( 'cch-th-gh-dark', plugins_url( 'assets/hjs/styles/github-dark.min.css', __FILE__ ), [], '1.0' );
         wp_enqueue_style( 'cch-th-script', plugins_url( 'assets/main.css', __FILE__ ), [], '1.0' );
 
         wp_enqueue_script( 'cch-th-hjs', plugins_url( 'assets/hjs/highlight.min.js', __FILE__ ), [], '1.0', true );

@@ -1,5 +1,5 @@
 class CopyButtonPlugin {
-    "after:highlightElement"({ el, text }) {
+    "after:highlightElement"({el, text}) {
         if (el.parentElement.parentElement.querySelector('.cch-header').querySelector(".hljs-copy-button")) return;
         let button = Object.assign(document.createElement("button"), {
             innerHTML: "Copy",
@@ -8,7 +8,7 @@ class CopyButtonPlugin {
         button.dataset.copied = false;
         const cchHeader = el.parentElement.parentElement.querySelector('.cch-header');
         cchHeader.appendChild(button);
-        
+
         const nonNavigator = (text) => {
             const textArea = document.createElement("textarea");
             textArea.value = text;
@@ -32,7 +32,7 @@ class CopyButtonPlugin {
 
         const updateDataCopy = () => {
             if (button.dataset.copied === 'true') return;
-            
+
             button.innerHTML = "Copied!";
             button.dataset.copied = true;
 
@@ -62,10 +62,10 @@ class CopyButtonPlugin {
     }
 }
 
-jQuery(document).ready(function($) {
-    $('.cch-manual').each(function(idx, e){
-        const cchElement = '<div class="cch-container"><div class="cch-header"><span class="filename">'+
-        e.dataset.filename +'</span></div><pre>'+$(this).closest('pre').html()+'</pre></div>';
+jQuery(document).ready(function ($) {
+    $('.cch-manual').each(function (idx, e) {
+        const cchElement = '<div class="cch-container"><div class="cch-header"><span class="filename">' +
+            e.dataset.filename + '</span></div><pre>' + $(this).closest('pre').html() + '</pre></div>';
         $(this).closest('pre').replaceWith(cchElement);
     });
     hljs.addPlugin(new CopyButtonPlugin());
