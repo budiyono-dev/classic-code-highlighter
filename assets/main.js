@@ -65,14 +65,38 @@ class CopyButtonPlugin {
 jQuery(document).ready(function ($) {
     $('.cch-manual').each(function (idx, e) {
         const filename = e?.dataset?.filename ?? '';
-        const cchElement = '<div class="cch-container"><div class="cch-header"><span class="filename">' +
-            filename + '</span></div><pre>' + $(this).closest('pre').html() + '</pre></div>';
-        $(this).closest('pre').replaceWith(cchElement);
+        if (e.tagName === 'CODE') {
+            const cchElement = '<div class="cch-container"><div class="cch-header"><span class="filename">' +
+                filename + '</span></div><pre>' + $(this).closest('pre').html() + '</pre></div>';
+            $(this).closest('pre').replaceWith(cchElement);
+        } else if (e.tagName === 'PRE') {
+            const listClass = Array.from(e.classList);
+            let filename = '';
+            let language = '';
+            listClass.forEach(cls => {
+                if (cls.includes('cch-name')) {
+                    const clsS = cls.split('-');
+                    if (clsS.length < 3) return;
+                    for (let i = 2; i < clsS.length - 1; i++) {
+                        filename += clsS[i];
+                    }
+                    filename += '.' + clsS[clsS.length - 1];
+                } else if (cls.includes('cch-code')) {
+                    const clsS = cls.split('-');
+                    if (clsS.length < 3) return;
+                    language = 'language-' + clsS[2];
+                }
+            });
+            const cchElement = '<div class="cch-container"><div class="cch-header"><span class="filename">' +
+                filename + '</span></div><pre><code class="cch-manual ' + language + '">' + $(this).find('code').html() + '</code></pre></div>';
+            $(this).replaceWith(cchElement);
+        }
+
     });
     hljs.addPlugin(new CopyButtonPlugin());
 
-    $('pre code').each(function(idx, el){
-        const classlist  = el.classList;
+    $('pre code').each(function (idx, el) {
+        const classlist = el.classList;
         if (classlist.contains('cch_sc') || classlist.contains("cch-manual")) {
             hljs.highlightElement(el);
         }
